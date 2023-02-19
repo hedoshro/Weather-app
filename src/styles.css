@@ -18,11 +18,14 @@ li {
   list-style: none;
   line-height: 19px;
   font-size: 16px;
-  text-transform: capitalize;
+
   font-weight: 100;
   color: #878787;
   margin: 0;
   padding: 0;
+}
+li:first-letter {
+  text-transform: uppercase;
 }
 .weather-app {
   max-width: 600px;
