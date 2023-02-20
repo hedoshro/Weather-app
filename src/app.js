@@ -38,6 +38,10 @@ function displayTemperature(response) {
   document.querySelector("#date").innerHTML = formatDate(
     response.data.time * 1000
   );
+  let img = document.querySelector("#icon");
+  img.setAttribute("src", `${response.data.condition.icon_url}`);
+  let imgAlt = document.querySelector("#icon");
+  imgAlt.setAttribute("alt", `${response.data.condition.description}`);
 }
 let apiKey = "a49f0cad903e09dc8e1t8o40aab88ab3";
 let city = "istanbul";
