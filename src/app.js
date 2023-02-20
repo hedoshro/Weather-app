@@ -43,8 +43,17 @@ function displayTemperature(response) {
   let imgAlt = document.querySelector("#icon");
   imgAlt.setAttribute("alt", `${response.data.condition.description}`);
 }
-let apiKey = "a49f0cad903e09dc8e1t8o40aab88ab3";
-let city = "istanbul";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-console.log(apiUrl);
-axios.get(apiUrl).then(displayTemperature);
+function showDetail(city) {
+  let apiKey = "a49f0cad903e09dc8e1t8o40aab88ab3";
+
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+function search(event) {
+  event.preventDefault();
+  let input = document.querySelector("#search-city-input").value;
+  showDetail(input);
+}
+document.querySelector("#search-form").addEventListener("submit", search);
