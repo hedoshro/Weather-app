@@ -27,6 +27,10 @@ function displayTemperature(response) {
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.temperature.current
   );
+
+  ctemp = response.data.temperature.current;
+
+  console.log(ctemp);
   document.querySelector("#city").innerHTML = response.data.city;
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
@@ -57,3 +61,28 @@ function search(event) {
   showDetail(input);
 }
 document.querySelector("#search-form").addEventListener("submit", search);
+
+function showFarenheite(event) {
+  event.preventDefault();
+  let convertFarenheit = (ctemp * 9) / 5 + 32;
+  celcius.classList.remove("active");
+  celcius.classList.add("active");
+
+  document.querySelector("#temperature").innerHTML =
+    Math.round(convertFarenheit);
+}
+
+let ctemp = null;
+
+let farenheite = document.querySelector("#faren");
+farenheite.addEventListener("click", showFarenheite);
+
+function showecelcius(event) {
+  event.preventDefault();
+  celcius.classList.add("active");
+  celcius.classList.remove("active");
+  document.querySelector("#temperature").innerHTML = Math.round(ctemp);
+}
+
+let celcius = document.querySelector("#celcius");
+celcius.addEventListener("click", showecelcius);
