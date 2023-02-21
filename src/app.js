@@ -30,7 +30,6 @@ function displayTemperature(response) {
 
   ctemp = response.data.temperature.current;
 
-  console.log(ctemp);
   document.querySelector("#city").innerHTML = response.data.city;
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
