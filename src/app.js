@@ -85,3 +85,5 @@ function showecelcius(event) {
 
 let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", showecelcius);
+
+showDetail("new york");
