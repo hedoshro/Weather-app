@@ -60,3 +60,22 @@ li:first-letter {
   color: #212121;
   cursor: default;
 }
+.weather-forecast {
+  text-align: center;
+  margin-top: 20px;
+  color: #000000;
+}
+.forecast-date {
+  font-size: 16px;
+  opacity: 0.7;
+}
+.forecast-icon {
+  display: block;
+  margin: 0 auto;
+}
+.forecast-temp {
+  font-size: 13px;
+}
+.forecast-min {
+  opacity: 0.7;
+}
