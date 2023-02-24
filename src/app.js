@@ -21,6 +21,54 @@ function formatDate(timestamp) {
   let day = weekDays[date.getDay()];
   return `last updated: ${day} ${hours}:${minutes}:${seconds}`;
 }
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecastDaily = response.data.daily;
+  console.log(response.data.daily);
+  let forecastElement = document.querySelector("#weather-forecast");
+  let forecastHTML = ` <div class="row">`;
+
+  forecastDaily.forEach(function (forecastDays, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+        <div class="forecast-date"> ${formatDay(forecastDays.time)}</div>
+        <img
+          src=${forecastDays.condition.icon_url}
+          alt=""
+          width="42"
+          class="forecast-icon"
+        />
+        <div class="forecast-temp">
+          <span class="forecast-max">${Math.round(
+            forecastDays.temperature.maximum
+          )}°</span>
+          <span class="forecast-min"> ${Math.round(
+            forecastDays.temperature.minimum
+          )}°</span>
+        </div>
+      </div>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "a49f0cad903e09dc8e1t8o40aab88ab3";
+
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayTemperature(response) {
   console.log(response);
 
@@ -45,6 +93,7 @@ function displayTemperature(response) {
   img.setAttribute("src", `${response.data.condition.icon_url}`);
   let imgAlt = document.querySelector("#icon");
   imgAlt.setAttribute("alt", `${response.data.condition.description}`);
+  getForecast(response.data.coordinates);
 }
 function showDetail(city) {
   let apiKey = "a49f0cad903e09dc8e1t8o40aab88ab3";
