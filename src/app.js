@@ -50,7 +50,7 @@ function displayForecast(response) {
         <div class="forecast-temp">
           <span class="forecast-max">${Math.round(
             forecastDays.temperature.maximum
-          )}°</span>
+          )} °</span>
           <span class="forecast-min"> ${Math.round(
             forecastDays.temperature.minimum
           )}°</span>
@@ -61,8 +61,8 @@ function displayForecast(response) {
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
-function getForecast(coordinates) {
-  console.log(coordinates);
+
+function getForecast(coordinates, prevUnits) {
   let apiKey = "a49f0cad903e09dc8e1t8o40aab88ab3";
 
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
@@ -75,8 +75,6 @@ function displayTemperature(response) {
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.temperature.current
   );
-
-  ctemp = response.data.temperature.current;
 
   document.querySelector("#city").innerHTML = response.data.city;
   document.querySelector("#description").innerHTML =
@@ -109,30 +107,5 @@ function search(event) {
   showDetail(input);
 }
 document.querySelector("#search-form").addEventListener("submit", search);
-
-function showFarenheite(event) {
-  event.preventDefault();
-  let convertFarenheit = (ctemp * 9) / 5 + 32;
-  celcius.classList.remove("active");
-  celcius.classList.add("active");
-
-  document.querySelector("#temperature").innerHTML =
-    Math.round(convertFarenheit);
-}
-
-let ctemp = null;
-
-let farenheite = document.querySelector("#faren");
-farenheite.addEventListener("click", showFarenheite);
-
-function showecelcius(event) {
-  event.preventDefault();
-  celcius.classList.add("active");
-  celcius.classList.remove("active");
-  document.querySelector("#temperature").innerHTML = Math.round(ctemp);
-}
-
-let celcius = document.querySelector("#celcius");
-celcius.addEventListener("click", showecelcius);
 
 showDetail("new york");
